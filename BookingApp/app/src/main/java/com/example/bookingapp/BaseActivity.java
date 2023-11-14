@@ -2,8 +2,10 @@ package com.example.bookingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -20,22 +22,25 @@ public class BaseActivity extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
 
+    LoginFragment loginFragment;
+    HomeFragment homeFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_activity);
 
+        homeFragment = HomeFragment.newInstance("Fragment 1" ,"ovo je home fragment");
         FragmentTransaction transaction = BaseActivity.this.getSupportFragmentManager()
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_placeholder, HomeFragment.newInstance("Fragment 1", "Ovo je fragment 1"));
+                .replace(R.id.fragment_placeholder, homeFragment);
         transaction.commit();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
-
 
         setup();
         setNavigation();
@@ -56,6 +61,9 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+
+
+
     protected void setNavigation() {
         NavigationView navigationView = findViewById(R.id.navigation_view);
         Menu menu = navigationView.getMenu();
@@ -64,22 +72,23 @@ public class BaseActivity extends AppCompatActivity {
         //MenuItem item = menu.getItem(0);   ->   this is how you get item by position
         //item.setVisible(false);
         menu.getItem(0).setOnMenuItemClickListener((v -> {
+            //homeFragment = HomeFragment.newInstance("fragment 1", "ovo je prvi fragment");
             FragmentTransaction transaction = BaseActivity.this.getSupportFragmentManager()
                     .beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .replace(R.id.fragment_placeholder, HomeFragment.newInstance("Fragment 1", "Ovo je fragment 1"));
+                    .replace(R.id.fragment_placeholder, homeFragment);
             transaction.addToBackStack(null);
             transaction.commit();
             drawerLayout.closeDrawer(navigationView);
-            
             return true;
         }));
 
         menu.getItem(10).setOnMenuItemClickListener((v -> {
             //Intent i = new Intent(BaseActivity.this, LoginActivity.class);
             //startActivity(i);
-            FragmentTransition.to(LoginFragment.newInstance(), BaseActivity.this, false, R.id.fragment_placeholder);
-
+            loginFragment = LoginFragment.newInstance();
+            FragmentTransition.to(loginFragment, BaseActivity.this, false, R.id.fragment_placeholder);
+            drawerLayout.closeDrawer(navigationView);
             return true;
         }));
 
@@ -102,9 +111,9 @@ public class BaseActivity extends AppCompatActivity {
         int id = item.getItemId();
         final int help = R.id.help;
         final int settings = R.id.settings;
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
+            if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+                return true;
+            }
         if (id == help) {
             //show help
             Toast.makeText(BaseActivity.this, "Help", Toast.LENGTH_SHORT).show();
