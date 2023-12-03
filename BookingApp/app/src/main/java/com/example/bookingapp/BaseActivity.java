@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.bookingapp.fragments.CreateAccommodationBaseFragment;
+import com.example.bookingapp.fragments.DefineAccommodationDetailsFragment;
 import com.example.bookingapp.fragments.FavouriteAccommodationsFragment;
 import com.example.bookingapp.fragments.HomeFragment;
 import com.example.bookingapp.fragments.LoginFragment;
@@ -176,8 +177,16 @@ public class BaseActivity extends AppCompatActivity {
             return true;
         }));
 
-        menu.getItem(12).setOnMenuItemClickListener((v-> {
+        menu.getItem(13).setOnMenuItemClickListener((v-> {
             FragmentTransition.to(CreateAccommodationBaseFragment.newInstance(), BaseActivity.this, false, R.id.fragment_placeholder);
+
+            drawerLayout.closeDrawer(GravityCompat.START);
+
+            return true;
+        }));
+
+        menu.getItem(14).setOnMenuItemClickListener((v->{
+            FragmentTransition.to(DefineAccommodationDetailsFragment.newInstance(), BaseActivity.this, false, R.id.fragment_placeholder);
 
             drawerLayout.closeDrawer(GravityCompat.START);
 

@@ -60,6 +60,9 @@
         android:id="@+id/create_accommodation"
         android:title="Create accommodation"/>
 
+    <item
+        android:id="@+id/updateAccommodationDetails"
+        android:title="Update accommodation details"/>
 
     <item
         android:id="@+id/nav_logout"

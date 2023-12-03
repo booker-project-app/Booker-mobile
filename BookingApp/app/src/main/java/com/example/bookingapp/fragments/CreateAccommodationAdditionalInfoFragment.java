@@ -101,7 +101,6 @@ public class CreateAccommodationAdditionalInfoFragment extends Fragment {
         numberPickerDialog.setValueChangeListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                // Handle the selected value, e.g., set it to the EditText
                 targetEditText.setText(String.valueOf(newVal));
             }
         });

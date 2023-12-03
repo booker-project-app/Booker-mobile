@@ -79,4 +79,6 @@
     <string name="next_image">next image</string>
     <string name="previous_image">previous image</string>
     <string name="select_report_type_you_want">Select report type you want:</string>
+    <string name="new_price">New price</string>
+    <string name="cancellation_deadline">Cancellation limit</string>
 </resources>

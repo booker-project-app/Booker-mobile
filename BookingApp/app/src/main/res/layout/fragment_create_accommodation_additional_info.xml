@@ -153,7 +153,6 @@
                     android:minHeight="48dp" />
             </LinearLayout>
 
-        <!-- Inside the ConstraintLayout with id "buttonPanel" -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/buttonPanel"
             android:layout_width="match_parent"
